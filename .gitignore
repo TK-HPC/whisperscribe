@@ -1,0 +1,17 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local recordings and downloaded model weights
+1.wav
+model/
+
+# External transcribe.cpp checkout and build artifacts
+transcribe.cpp/
