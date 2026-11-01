@@ -17,6 +17,7 @@ The app records 16 kHz mono audio. Edit `keywords.txt` to add one custom term pe
 ```text
 WhisperScribe/
 ├── main.py                         # app entry point
+├── transcriber.py                  # recording and local ASR
 ├── README.md
 ├── pyproject.toml                  # Python dependencies
 ├── uv.lock                         # locked Python dependency versions
@@ -31,7 +32,7 @@ WhisperScribe/
 └── .venv/                          # created by `uv sync` (ignored)
 ```
 
-`main.py` expects the model and CLI at those exact paths. `src/wisprflow/` is leftover starter-package scaffolding; the Hyprland shortcut runs `main.py` directly.
+`transcriber.py` expects the model and CLI at those exact paths. `src/wisprflow/` is leftover starter-package scaffolding; the Hyprland shortcut runs `main.py` directly.
 
 ## Requirements
 
