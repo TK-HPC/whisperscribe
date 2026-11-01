@@ -1,0 +1,15 @@
+WhisperScribe
+Qwen3-ASR
+Hyprland
+OpenRouter
+ASR
+GitHub
+Codex
+Sol
+Luna
+Astra
+LLM
+GGUF
+CUDA
+NVIDIA
+Wayland

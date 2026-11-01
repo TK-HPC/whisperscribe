@@ -6,11 +6,11 @@ I was inspired by Wispr Flow, but wanted dictation on **Arch Linux + Hyprland** 
 
 I might later experiment with custom vocabulary and fine-tuning for my own voice. For now, it works well enough for me.
 
-**Win+X** starts recording; press it again to stop. The recording is transcribed locally with [transcribe.cpp](https://github.com/handy-computer/transcribe.cpp), and the transcript is copied to the Wayland clipboard.
+**Win+X** starts recording; press it again to stop. The capsule hides immediately; after local transcription with [transcribe.cpp](https://github.com/handy-computer/transcribe.cpp), WhisperScribe copies the text and sends Ctrl+Shift+V to the active window. Custom vocabulary terms from `keywords.txt` are passed to Qwen3-ASR during inference.
 
 On my GPU, transcription after recording runs at about **70× real time**. Speed varies with the GPU, model, and audio.
 
-The app records 16 kHz mono audio. The model and recording are local files and are ignored by Git.
+The app records 16 kHz mono audio. Edit `keywords.txt` to add one custom term per line; Qwen3-ASR uses these as vocabulary hints and may still miss or alter a term. The model and recording are local files and are ignored by Git.
 
 ## Project layout
 
@@ -22,6 +22,7 @@ WhisperScribe/
 ├── uv.lock                         # locked Python dependency versions
 ├── .python-version
 ├── .gitignore
+├── keywords.txt                    # custom terms passed to Qwen3-ASR
 ├── model/                          # download the GGUF model here (ignored)
 │   └── Qwen3-ASR-1.7B-Q4_K_M.gguf
 ├── transcribe.cpp/                 # upstream clone (ignored, separate Git repo)
@@ -116,7 +117,7 @@ Reload Hyprland:
 hyprctl reload
 ```
 
-Press **Win+X** once to start recording and again to stop and transcribe. The transcript is copied to the clipboard; paste it where you need it. The CLI can also transcribe a 16 kHz mono WAV directly:
+Press **Win+X** once to start recording and again to stop and transcribe. WhisperScribe copies the transcript and sends Ctrl+Shift+V to the active window when transcription finishes. The CLI can also transcribe a 16 kHz mono WAV directly:
 
 ```bash
 ./transcribe.cpp/build/bin/transcribe-cli \
