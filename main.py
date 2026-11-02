@@ -101,7 +101,11 @@ class Capsule:
 
     def _tick(self):
         self.level = self.transcriber.level
-        if self.transcriber.transcript is not None:
+        if self.transcriber.error:
+            print(f"WhisperScribe: {self.transcriber.error}", flush=True)
+            self.transcriber.error = None
+            self._hide()
+        elif self.transcriber.transcript is not None:
             transcript = self.transcriber.transcript
             self.transcriber.transcript = None
             self._handle_transcript(transcript)

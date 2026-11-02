@@ -20,10 +20,12 @@ class Transcriber:
         self.recording = threading.Event()
         self.level = 0.0
         self.transcript = None
+        self.error = None
 
     def start(self):
         self.level = 0.0
         self.transcript = None
+        self.error = None
         self.recording.set()
         threading.Thread(target=self._run, daemon=True).start()
 
@@ -31,8 +33,11 @@ class Transcriber:
         self.recording.clear()
 
     def _run(self):
-        frames = self._record()
-        self.transcript = self._transcribe(frames)
+        try:
+            frames = self._record()
+            self.transcript = self._transcribe(frames)
+        except Exception as error:
+            self.error = error
 
     def _record(self):
         frames = []
